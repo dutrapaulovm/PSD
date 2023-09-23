@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from entidades import *
+from PySide6.QtWidgets import QMessageBox
 
 # Configuração da conexão com o banco de dados
 user = 'root' #Nome do usuário do banco de dados
@@ -28,4 +29,8 @@ try:
     session = Session()
 
 except Exception as e:
-    print("Falha na conexão:", e)
+        dlg = QMessageBox(None)
+        dlg.setWindowTitle("Erro!")
+        dlg.setText("Houve um erro de conexão {}".format(e))
+        dlg.exec_()
+        print("Erro durante a conexão:", e)
